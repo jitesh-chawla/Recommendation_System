@@ -1,14 +1,10 @@
 import sys
-
-
-# reload(sys)
-
-# sys.setdefaultencoding('utf-8')
 import itertools
 
 candid_freq= list()
 output_file = open("jitesh_chawla_multihash.txt",'w')
 
+# Creating the first hash function.
 def create_hashfunc1(combination,bucketsize):
     sum1=0
     for item in combination:
@@ -16,6 +12,7 @@ def create_hashfunc1(combination,bucketsize):
             sum1+= ord(i)
     return sum1%bucketsize
 
+# Creating the second hash function.
 def create_hashfunc2(combination,bucketsize):
     sum2=0
     for item in combination:
@@ -23,6 +20,7 @@ def create_hashfunc2(combination,bucketsize):
             sum2+= ord(i)+15
     return sum2%bucketsize
 
+# Determining hash table.
 def create_hashtable(basket, subset_length):
     for combination in list(itertools.combinations(basket, subset_length)):
         # print(combination)
@@ -33,6 +31,8 @@ def create_hashtable(basket, subset_length):
 
     return bitvector1,bitvector2
 
+
+# Assigning input parameters
 if __name__ == '__main__':
 
     inputfile = sys.argv[1]
@@ -80,6 +80,7 @@ if __name__ == '__main__':
     # print(bitvector1)
     # print(bitvector2)
 
+# Performing the iterations until we do not have any other new frequent itemsets.
     while flag:
 
         for line in open(inputfile):
@@ -156,45 +157,3 @@ if __name__ == '__main__':
             print(sorted(frequent_double))
             print("\n")
             output_file.write(str(candidate_items1) + "\n" + str(candidate_items1) + "\n" + str(sorted(frequent_double)) + "\n\n" )
-    # print(combination)
-    # for line in open(inputfile):
-    #     line = line.rstrip('\n')
-    #     basket = line.split(',')
-    #     basket.sort()
-    #     for item_set in list(itertools.combinations(basket, subset_length + 1)):
-    #         print(item_set)
-
-
-    # for combination in list(itertools.combinations(frequent_items_1 , subset_length+1)):
-    #     hashvalue1 = create_hashfunc1(combination, bucketsize)
-    #     hashvalue2 = create_hashfunc2(combination, bucketsize)
-    #     print(hashvalue1, hashvalue2)
-    #     # print(bitvector2[hashvalue2])
-    #     if bitvector1[hashvalue1] == 1 & bitvector2[hashvalue2] == 1:
-    #         frequent_items_future.append(combination)
-    # print(frequent_items_future)
-    # for line in open(inputfile):
-    #     inplist1.append(line.strip())
-    #     inplist2.append(line.strip())
-    # for i in range(0, len(inplist1)):
-    #     inplist3.append(inplist1[i].split(","))
-    # print(inplist3)
-    # inp_dict = {}
-    # for i in range(0, len(inplist1)):
-    #     for j in range(0, len(inplist1[i].split(","))):
-    #         count = 0
-    #         char1 = inplist1[i].split(",")[j]
-    #         for s in range(0, len(inplist1)):
-    #             for k in range(0, len(inplist1[s].split(","))):
-    #                 char2 = inplist2[s].split(",")[k]
-    #                 if char1 == char2:
-    #                     count += 1
-    #                 if count >= support:
-    #                     inp_dict[inplist1[i].split(",")[j]] = count
-    # for k in inp_dict.keys():
-    #     i = inp_dict.keys().index(k)
-    #     inp_dict[k] = i + 1
-    # print(inp_dict)
-    # frequentsingletons = sorted(inp_dict.keys())
-    # print(frequentsingletons)
-    # multihash(sys.argv[1], int(sys.argv[2]), int(sys.argv
